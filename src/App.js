@@ -14,7 +14,14 @@ class App extends React.Component {
       currentTask: "",
     };
   }
-
+  componentDidMount() {
+    if (window.localStorage.getItem('myState')) {
+      this.setState(JSON.parse(window.localStorage.getItem('myState')));
+    }
+  }
+  componentDidUpdate() {
+    window.localStorage.setItem('myState', JSON.stringify(this.state));
+  }
   addTask = (task) => {
     let newTaskObject = {
       task:task,
