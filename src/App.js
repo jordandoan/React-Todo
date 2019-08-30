@@ -38,7 +38,11 @@ class App extends React.Component {
       currentTask:event.target.value,
     });
   }
-  
+
+  handleClear = () => {
+    this.setState({tasks: this.state.tasks.filter(task => !task.completed)});
+  }
+
   handleComplete = (event, task) => {
     event.target.parentNode.classList.toggle("completed");
     let newState = this.state;
@@ -52,7 +56,7 @@ class App extends React.Component {
       <div>
         <h2>Welcome to your Todo App!</h2>
         <TodoList tasks={this.state.tasks} handleComplete={this.handleComplete}/>
-        <TodoForm addTask={this.addTask} handleKeypress={this.handleKeypress} handleChange={this.handleChange} currentTask={this.state.currentTask}/>
+        <TodoForm handleClear={this.handleClear} addTask={this.addTask} handleKeypress={this.handleKeypress} handleChange={this.handleChange} currentTask={this.state.currentTask}/>
       </div>
     );
   }
