@@ -6,7 +6,11 @@ class TodoList extends Component {
     return (
       <div>
         <h2>Your To Do List</h2>
-        {this.props.tasks.map(task => <p key={task.id}>{task.task}</p>)} 
+        {this.props.tasks.map((task) => {
+            return (<div className="task">
+              <p key={task.id}>{task.task}<button onClick={(event) => {this.props.handleComplete(event,task)}}>Complete</button></p>
+            </div>);
+        })} 
         </div>
     );
   }

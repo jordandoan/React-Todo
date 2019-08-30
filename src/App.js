@@ -1,6 +1,8 @@
 import React from 'react';
 import TodoList from './components/TodoComponents/TodoList';
 import TodoForm from './components/TodoComponents/TodoForm';
+
+import './components/TodoComponents/Todo.css';
 class App extends React.Component {
   // you will need a place to store your state in this component.
   // design `App` to be the parent component of your application.
@@ -36,12 +38,20 @@ class App extends React.Component {
       currentTask:event.target.value,
     });
   }
+  
+  handleComplete = (event, task) => {
+    event.target.parentNode.classList.toggle("completed");
+    let newState = this.state;
+    let index = newState.tasks.findIndex(oldTask => oldTask.id === task.id);
+    newState.tasks[index].completed = !newState.tasks[index].completed;
+    this.setState(newState);
+  }
 
   render() {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
-        <TodoList tasks={this.state.tasks}/>
+        <TodoList tasks={this.state.tasks} handleComplete={this.handleComplete}/>
         <TodoForm addTask={this.addTask} handleKeypress={this.handleKeypress} handleChange={this.handleChange} currentTask={this.state.currentTask}/>
       </div>
     );
