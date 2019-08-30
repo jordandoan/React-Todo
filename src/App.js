@@ -25,6 +25,12 @@ class App extends React.Component {
     this.setState(newState);
   }
 
+  handleKeypress = (event, task) => {
+    if (event.keyCode == 13) {
+      this.addTask(task);
+    }
+  }
+
   handleChange = (event) => {
     this.setState({
       currentTask:event.target.value,
@@ -36,7 +42,7 @@ class App extends React.Component {
       <div>
         <h2>Welcome to your Todo App!</h2>
         <TodoList tasks={this.state.tasks}/>
-        <TodoForm addTask={this.addTask} handleChange={this.handleChange} currentTask={this.state.currentTask}/>
+        <TodoForm addTask={this.addTask} handleKeypress={this.handleKeypress} handleChange={this.handleChange} currentTask={this.state.currentTask}/>
       </div>
     );
   }
